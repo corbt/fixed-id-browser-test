@@ -107,9 +107,11 @@ async function main() {
   console.log("Generating the keypair");
   const keypair = zok.setup(artifacts.program);
 
-  console.log("Generating the proof");
+  console.log("Generating the proof", new Date());
+  const start = new Date();
   const proof = zok.generateProof(artifacts.program, witness, keypair.pk);
-  console.log("Valid proof generated");
+  console.log("Valid proof generated", new Date());
+  alert(`Proof took ${(new Date() - start) / 1000}`);
 
   console.log("Exporting the verifier");
   const verifier = zok.exportSolidityVerifier(keypair.vk, "v1");
